@@ -79,6 +79,7 @@ namespace BaseEditor
             var nodeFound = treeView.SelectedNode != null;
             tsmiAddItem.Visible = nodeFound;
             tsmiRenameItem.Visible = nodeFound;
+            tsmiDeleteItem.Visible = nodeFound;
             // если нет выбранного узла, то меню не показываем совсем
             e.Cancel = !nodeFound;
         }
@@ -111,13 +112,31 @@ namespace BaseEditor
         {
             if (treeView.SelectedNode == null) return;
             var item = (ModelItem)treeView.SelectedNode.Tag;
-            var childItem = new ModelItem() { Name = "Child" };
+            // создадим элемент
+            var childItem = new ModelItem() { Name = "Child", Parent = item };
             item.Childs.Add(childItem);
-            //
+            // внесём изменения в визуальный интерфейс
             treeView.SelectedNode.Expand();
             var childNode = new TreeNode(childItem.Name) { Tag = childItem };
             treeView.SelectedNode.Nodes.Add(childNode);
             treeView.SelectedNode = childNode;
+        }
+
+        /// <summary>
+        /// Удаление узла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmiDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            if (item.Parent == null) return;
+            item.Parent.Childs.Remove(item);
+            // внесём изменения в визуальный интерфейс
+            var parentNode = treeView.SelectedNode.Parent;
+            parentNode.Nodes.Remove(treeView.SelectedNode);
+            treeView.SelectedNode = parentNode;
         }
     }
 }

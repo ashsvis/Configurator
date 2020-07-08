@@ -80,6 +80,8 @@
             this.tsmiAddItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRenameItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiDeleteItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -510,29 +512,43 @@
             this.treeContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiRenameItem,
             this.toolStripMenuItem1,
-            this.tsmiAddItem});
+            this.tsmiAddItem,
+            this.toolStripMenuItem2,
+            this.tsmiDeleteItem});
             this.treeContextMenu.Name = "treeContextMenu";
-            this.treeContextMenu.Size = new System.Drawing.Size(181, 76);
+            this.treeContextMenu.Size = new System.Drawing.Size(210, 104);
             this.treeContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.treeContextMenu_Opening);
             // 
             // tsmiAddItem
             // 
             this.tsmiAddItem.Name = "tsmiAddItem";
-            this.tsmiAddItem.Size = new System.Drawing.Size(180, 22);
+            this.tsmiAddItem.Size = new System.Drawing.Size(209, 22);
             this.tsmiAddItem.Text = "Add a child item...";
             this.tsmiAddItem.Click += new System.EventHandler(this.tsmiAddItem_Click);
             // 
             // tsmiRenameItem
             // 
             this.tsmiRenameItem.Name = "tsmiRenameItem";
-            this.tsmiRenameItem.Size = new System.Drawing.Size(180, 22);
+            this.tsmiRenameItem.Size = new System.Drawing.Size(209, 22);
             this.tsmiRenameItem.Text = "Rename item...";
             this.tsmiRenameItem.Click += new System.EventHandler(this.tsmiRenameItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(206, 6);
+            // 
+            // tsmiDeleteItem
+            // 
+            this.tsmiDeleteItem.Name = "tsmiDeleteItem";
+            this.tsmiDeleteItem.Size = new System.Drawing.Size(209, 22);
+            this.tsmiDeleteItem.Text = "Delete item and his childs";
+            this.tsmiDeleteItem.Click += new System.EventHandler(this.tsmiDeleteItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(206, 6);
             // 
             // BaseEditorForm
             // 
@@ -619,6 +635,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAddItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiRenameItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteItem;
     }
 }
 
