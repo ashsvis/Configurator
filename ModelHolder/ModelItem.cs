@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace ModelHolder
 {
+    [Serializable]
     public class ModelItem
     {
         public ModelItem Parent { get; set; }

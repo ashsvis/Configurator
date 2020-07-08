@@ -1,5 +1,6 @@
 ﻿using ModelHolder;
 using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -8,15 +9,24 @@ namespace BaseEditor
     public partial class BaseEditorForm : Form
     {
         private ModelRoot modelRoot = new ModelRoot();
+        private string defaultFileName;
 
         public BaseEditorForm()
         {
             InitializeComponent();
+            defaultFileName = Path.ChangeExtension(Application.ExecutablePath, ".bin");
         }
 
         private void BaseEditorForm_Load(object sender, System.EventArgs e)
         {
+            if (File.Exists(defaultFileName))
+                modelRoot = SaverLoader.LoadFromFile(defaultFileName);
             FillTree(treeView);
+        }
+
+        private void BaseEditorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaverLoader.SaveToFile(defaultFileName, modelRoot);
         }
 
         /// <summary>
@@ -32,6 +42,7 @@ namespace BaseEditor
                 var rootNode = new TreeNode(modelRoot.Name) { Tag = modelRoot };
                 treeView.Nodes.Add(rootNode);
                 AddChildNodes(rootNode, modelRoot);
+                treeView.ExpandAll();
             }
             finally
             {
@@ -52,11 +63,6 @@ namespace BaseEditor
                 node.Nodes.Add(childNode);
                 AddChildNodes(childNode, item);
             }
-        }
-
-        private void BaseEditorForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
         }
 
         /// <summary>
@@ -133,7 +139,7 @@ namespace BaseEditor
             if (treeView.SelectedNode == null) return;
             var item = (ModelItem)treeView.SelectedNode.Tag;
             if (item.Parent == null) return;
-            if (MessageBox.Show(this, "Are you sure to delete this item (with his childs)?", "Delete", 
+            if (MessageBox.Show(this, "Are you sure to delete this item (with his childs)?", "Delete item(s)", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
             item.Parent.Childs.Remove(item);
             // внесём изменения в визуальный интерфейс
