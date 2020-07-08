@@ -1,5 +1,6 @@
 ﻿using ModelHolder;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BaseEditor
@@ -56,6 +57,30 @@ namespace BaseEditor
         private void BaseEditorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Жмём мышкой на дереве
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView_MouseDown(object sender, MouseEventArgs e)
+        {
+            treeView.SelectedNode = treeView.GetNodeAt(e.Location);
+        }
+
+        /// <summary>
+        /// Перед открытием контекстного меню
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var nodeFound = treeView.SelectedNode != null;
+            tsmiAddItem.Visible = nodeFound;
+            tsmiRenameItem.Visible = nodeFound;
+            // если нет выбранного узла, то меню не показываем совсем
+            e.Cancel = !nodeFound;
         }
     }
 }
