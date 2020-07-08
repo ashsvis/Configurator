@@ -79,6 +79,7 @@
             this.treeContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiAddItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRenameItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -481,9 +482,9 @@
             // 
             // treeView
             // 
-            this.treeView.BackColor = System.Drawing.SystemColors.Control;
             this.treeView.ContextMenuStrip = this.treeContextMenu;
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView.HideSelection = false;
             this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Name = "treeView";
             this.treeView.ShowNodeToolTips = true;
@@ -493,10 +494,12 @@
             // 
             // listView
             // 
-            this.listView.BackColor = System.Drawing.SystemColors.Control;
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView.HideSelection = false;
             this.listView.Location = new System.Drawing.Point(0, 0);
+            this.listView.MultiSelect = false;
             this.listView.Name = "listView";
+            this.listView.ShowItemToolTips = true;
             this.listView.Size = new System.Drawing.Size(578, 342);
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
@@ -505,10 +508,11 @@
             // treeContextMenu
             // 
             this.treeContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiAddItem,
-            this.tsmiRenameItem});
+            this.tsmiRenameItem,
+            this.toolStripMenuItem1,
+            this.tsmiAddItem});
             this.treeContextMenu.Name = "treeContextMenu";
-            this.treeContextMenu.Size = new System.Drawing.Size(181, 70);
+            this.treeContextMenu.Size = new System.Drawing.Size(181, 76);
             this.treeContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.treeContextMenu_Opening);
             // 
             // tsmiAddItem
@@ -522,6 +526,12 @@
             this.tsmiRenameItem.Name = "tsmiRenameItem";
             this.tsmiRenameItem.Size = new System.Drawing.Size(180, 22);
             this.tsmiRenameItem.Text = "Переименовать...";
+            this.tsmiRenameItem.Click += new System.EventHandler(this.tsmiRenameItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // BaseEditorForm
             // 
@@ -607,6 +617,7 @@
         private System.Windows.Forms.ContextMenuStrip treeContextMenu;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiRenameItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }
 

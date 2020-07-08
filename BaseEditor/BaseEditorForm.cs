@@ -82,5 +82,22 @@ namespace BaseEditor
             // если нет выбранного узла, то меню не показываем совсем
             e.Cancel = !nodeFound;
         }
+
+        /// <summary>
+        /// Переименование сущности
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmiRenameItem_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var frm = new StringEditorForm();
+            frm.tbValue.Text = ((ModelItem)treeView.SelectedNode.Tag).Name;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                ((ModelItem)treeView.SelectedNode.Tag).Name = frm.tbValue.Text;
+                treeView.SelectedNode.Text = frm.tbValue.Text;
+            }
+        }
     }
 }
