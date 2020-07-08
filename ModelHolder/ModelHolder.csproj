@@ -43,9 +43,9 @@
   <ItemGroup>
     <Compile Include="ModelItem.cs" />
     <Compile Include="ModelRoot.cs" />
-    <Compile Include="ObjectCloner.cs" />
+    <Compile Include="Common\ObjectCloner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaverLoader.cs" />
+    <Compile Include="Common\SaverLoader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
