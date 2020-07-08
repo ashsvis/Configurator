@@ -13,7 +13,7 @@ namespace BaseEditor
         private string _operationName;
 
         /// <summary>
-        /// Конструктор запоминает рабочий слой, с которым будет работать undo/redo
+        /// Конструктор запоминает рабочий контекст, с которым будет работать undo/redo
         /// </summary>
         /// <param name="root"></param>
         public UndoRedoController(ModelRoot root)
@@ -27,7 +27,7 @@ namespace BaseEditor
         /// <param name="operationName"></param>
         public void OnStartOperation(string operationName)
         {
-            // сначала запоминаем копию по значению рабочего слоя в локальной переменной
+            // сначала запоминаем копию контекста по значению в локальной переменной
             _snapshot = _root.DeepClone();
             // запоминаем также наименование операции
             _operationName = operationName;
@@ -43,20 +43,18 @@ namespace BaseEditor
 
             Action undo = () =>
             {
-                _root.Childs = beforeOperationSnapshot.DeepClone().Childs;
-                _root.Properies = beforeOperationSnapshot.DeepClone().Properies;
                 _root.Id = beforeOperationSnapshot.DeepClone().Id;
                 _root.Name = beforeOperationSnapshot.DeepClone().Name;
-                _root.Parent = beforeOperationSnapshot.DeepClone().Parent;
+                _root.Childs = beforeOperationSnapshot.DeepClone().Childs;
+                _root.Properies = beforeOperationSnapshot.DeepClone().Properies;
             };
 
             Action redo = () =>
             {
-                _root.Childs = afterOperationSnapshot.DeepClone().Childs;
-                _root.Properies = afterOperationSnapshot.DeepClone().Properies;
                 _root.Id = afterOperationSnapshot.DeepClone().Id;
                 _root.Name = afterOperationSnapshot.DeepClone().Name;
-                _root.Parent = afterOperationSnapshot.DeepClone().Parent;
+                _root.Childs = afterOperationSnapshot.DeepClone().Childs;
+                _root.Properies = afterOperationSnapshot.DeepClone().Properies;
             };
 
             UndoRedoManager.Instance.Add(new ActionCommand(undo, redo) { Name = _operationName });

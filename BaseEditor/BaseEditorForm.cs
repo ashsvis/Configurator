@@ -1,32 +1,33 @@
 ﻿using ModelHolder;
 using System;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace BaseEditor
 {
     public partial class BaseEditorForm : Form
     {
-        private ModelRoot modelRoot = new ModelRoot();
-        private string defaultFileName;
+        private UndoRedoController _undoRedoController;
+        private ModelRoot _modelRoot = new ModelRoot();
+        private string _defaultFileName;
 
         public BaseEditorForm()
         {
             InitializeComponent();
-            defaultFileName = Path.ChangeExtension(Application.ExecutablePath, ".bin");
+            _defaultFileName = Path.ChangeExtension(Application.ExecutablePath, ".bin");
         }
 
-        private void BaseEditorForm_Load(object sender, System.EventArgs e)
+        private void BaseEditorForm_Load(object sender, EventArgs e)
         {
-            if (File.Exists(defaultFileName))
-                modelRoot = SaverLoader.LoadFromFile(defaultFileName);
+            if (File.Exists(_defaultFileName))
+                _modelRoot = SaverLoader.LoadFromFile(_defaultFileName);
+            _undoRedoController = new UndoRedoController(_modelRoot);
             FillTree(treeView);
         }
 
         private void BaseEditorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaverLoader.SaveToFile(defaultFileName, modelRoot);
+            SaverLoader.SaveToFile(_defaultFileName, _modelRoot);
         }
 
         /// <summary>
@@ -39,9 +40,9 @@ namespace BaseEditor
             try
             {
                 treeView.Nodes.Clear();
-                var rootNode = new TreeNode(modelRoot.Name) { Tag = modelRoot };
+                var rootNode = new TreeNode(_modelRoot.Name) { Tag = _modelRoot };
                 treeView.Nodes.Add(rootNode);
-                AddChildNodes(rootNode, modelRoot);
+                AddChildNodes(rootNode, _modelRoot);
                 treeView.ExpandAll();
             }
             finally
@@ -104,7 +105,9 @@ namespace BaseEditor
             frm.tbValue.Text = item.Name;
             if (frm.ShowDialog() == DialogResult.OK)
             {
+                _undoRedoController.OnStartOperation("Rename item");
                 item.Name = frm.tbValue.Text;
+                _undoRedoController.OnFinishOperation();
                 treeView.SelectedNode.Text = frm.tbValue.Text;
             }
         }
@@ -120,8 +123,10 @@ namespace BaseEditor
             if (treeView.SelectedNode == null) return;
             var item = (ModelItem)treeView.SelectedNode.Tag;
             // создадим элемент
+            _undoRedoController.OnStartOperation("Add item");
             var childItem = new ModelItem() { Name = "Child", Parent = item };
             item.Childs.Add(childItem);
+            _undoRedoController.OnFinishOperation();
             // внесём изменения в визуальный интерфейс
             treeView.SelectedNode.Expand();
             var childNode = new TreeNode(childItem.Name) { Tag = childItem };
@@ -141,11 +146,37 @@ namespace BaseEditor
             if (item.Parent == null) return;
             if (MessageBox.Show(this, "Are you sure to delete this item (with his childs)?", "Delete item(s)", 
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
+            _undoRedoController.OnStartOperation("Remove item");
             item.Parent.Childs.Remove(item);
+            _undoRedoController.OnFinishOperation();
             // внесём изменения в визуальный интерфейс
             var parentNode = treeView.SelectedNode.Parent;
             parentNode.Nodes.Remove(treeView.SelectedNode);
             treeView.SelectedNode = parentNode;
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UndoRedoManager.Instance.Undo();
+            FillTree(treeView);
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UndoRedoManager.Instance.Redo();
+            FillTree(treeView);
+        }
+
+        private void editToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            undoToolStripMenuItem.Enabled = UndoRedoManager.Instance.CanUndo;
+            redoToolStripMenuItem.Enabled = UndoRedoManager.Instance.CanRedo;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            tsbUndo.Enabled = UndoRedoManager.Instance.CanUndo;
+            tsbRedo.Enabled = UndoRedoManager.Instance.CanRedo;
         }
     }
 }
