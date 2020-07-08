@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelItem.cs" />
+    <Compile Include="ModelProperty.cs" />
     <Compile Include="ModelRoot.cs" />
     <Compile Include="Common\ObjectCloner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,46 +8,62 @@ namespace BaseEditor
     public partial class BaseEditorForm : Form
     {
         private UndoRedoController _undoRedoController;
+        // здесь храним состояние модели
         private ModelRoot _modelRoot = new ModelRoot();
         private string _defaultFileName;
 
         public BaseEditorForm()
         {
             InitializeComponent();
+            // имя файла для сохранения состояния по умолчанию
             _defaultFileName = Path.ChangeExtension(Application.ExecutablePath, ".bin");
         }
 
+        /// <summary>
+        /// Первоначальная главной загрузка формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BaseEditorForm_Load(object sender, EventArgs e)
         {
             if (File.Exists(_defaultFileName))
                 _modelRoot = SaverLoader.LoadFromFile(_defaultFileName);
+            // инициализация менеджера отмены/возврата состояния
             _undoRedoController = new UndoRedoController(_modelRoot);
+            // заполнение дерева
             FillTree(treeView);
         }
 
+        /// <summary>
+        /// Перед закрытием формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BaseEditorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // сохраняем состояние в файл
             SaverLoader.SaveToFile(_defaultFileName, _modelRoot);
         }
 
         /// <summary>
         /// Заполнение дерева сущностей
         /// </summary>
-        /// <param name="treeView"></param>
-        private void FillTree(TreeView treeView)
+        /// <param name="tv"></param>
+        private void FillTree(TreeView tv)
         {
-            treeView.BeginUpdate();
+            tv.BeginUpdate();
             try
             {
-                treeView.Nodes.Clear();
+                tv.Nodes.Clear();
                 var rootNode = new TreeNode(_modelRoot.Name) { Tag = _modelRoot };
-                treeView.Nodes.Add(rootNode);
+                tv.Nodes.Add(rootNode);
+                // заполняем дерево рекурсивно
                 AddChildNodes(rootNode, _modelRoot);
-                treeView.ExpandAll();
+                tv.ExpandAll();
             }
             finally
             {
-                treeView.EndUpdate();
+                tv.EndUpdate();
             }
         }
 
@@ -62,6 +78,7 @@ namespace BaseEditor
             {
                 var childNode = new TreeNode(item.Name) { Tag = item };
                 node.Nodes.Add(childNode);
+                // продолжаем заполнение для дочерних узлов
                 AddChildNodes(childNode, item);
             }
         }
@@ -109,6 +126,7 @@ namespace BaseEditor
                 item.Name = frm.tbValue.Text;
                 _undoRedoController.OnFinishOperation();
                 treeView.SelectedNode.Text = frm.tbValue.Text;
+                FillList(listView);
             }
         }
 
@@ -154,29 +172,92 @@ namespace BaseEditor
             parentNode.Nodes.Remove(treeView.SelectedNode);
             treeView.SelectedNode = parentNode;
         }
-
+        /// <summary>
+        /// Отменить последнее изменение
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UndoRedoManager.Instance.Undo();
             FillTree(treeView);
+            FillList(listView);
         }
 
+        /// <summary>
+        /// Вернуть отменённое состояние
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UndoRedoManager.Instance.Redo();
             FillTree(treeView);
+            FillList(listView);
         }
 
+        /// <summary>
+        /// Обновление состояний пунктов меню
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             undoToolStripMenuItem.Enabled = UndoRedoManager.Instance.CanUndo;
             redoToolStripMenuItem.Enabled = UndoRedoManager.Instance.CanRedo;
         }
 
+        /// <summary>
+        /// Обновление состояний кнопочек
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
             tsbUndo.Enabled = UndoRedoManager.Instance.CanUndo;
             tsbRedo.Enabled = UndoRedoManager.Instance.CanRedo;
+        }
+
+        /// <summary>
+        /// При выборе узла в дереве
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            FillList(listView);
+        }
+
+        
+        /// <summary>
+        /// Заполнение списка свойств
+        /// </summary>
+        /// <param name="lv"></param>
+        private void FillList(ListView lv)
+        {
+            lv.BeginUpdate();
+            try
+            {
+                lv.Items.Clear();
+                if (treeView.SelectedNode == null) return;
+                var item = (ModelItem)treeView.SelectedNode.Tag;
+                var lvi = new ListViewItem("Name");
+                lvi.SubItems.Add($"{item.Name}");
+                lv.Items.Add(lvi);
+                lvi = new ListViewItem("Descriptor");
+                lvi.SubItems.Add($"{item.Descriptor}");
+                lv.Items.Add(lvi);
+                foreach (var prop in item.Properies)
+                {
+                    lvi = new ListViewItem(prop.Name);
+                    lvi.SubItems.Add($"{prop.Value}");
+                    lv.Items.Add(lvi);
+                }
+            }
+            finally
+            {
+                lv.EndUpdate();
+            }
         }
     }
 }
