@@ -79,6 +79,7 @@ namespace BaseEditor
             var nodeFound = treeView.SelectedNode != null;
             tsmiAddItem.Visible = nodeFound;
             tsmiRenameItem.Visible = nodeFound;
+            tsmiDeleteItem.Enabled = nodeFound && treeView.SelectedNode.Parent != null;
             tsmiDeleteItem.Visible = nodeFound;
             // если нет выбранного узла, то меню не показываем совсем
             e.Cancel = !nodeFound;
@@ -132,6 +133,8 @@ namespace BaseEditor
             if (treeView.SelectedNode == null) return;
             var item = (ModelItem)treeView.SelectedNode.Tag;
             if (item.Parent == null) return;
+            if (MessageBox.Show(this, "Are you sure to delete this item (with his childs)?", "Delete", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
             item.Parent.Childs.Remove(item);
             // внесём изменения в визуальный интерфейс
             var parentNode = treeView.SelectedNode.Parent;
