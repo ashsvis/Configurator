@@ -92,12 +92,32 @@ namespace BaseEditor
         {
             if (treeView.SelectedNode == null) return;
             var frm = new StringEditorForm();
-            frm.tbValue.Text = ((ModelItem)treeView.SelectedNode.Tag).Name;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            frm.tbValue.Text = item.Name;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                ((ModelItem)treeView.SelectedNode.Tag).Name = frm.tbValue.Text;
+                item.Name = frm.tbValue.Text;
                 treeView.SelectedNode.Text = frm.tbValue.Text;
             }
+        }
+
+
+        /// <summary>
+        /// Добавим вложенный элемент
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmiAddItem_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            var childItem = new ModelItem() { Name = "Child" };
+            item.Childs.Add(childItem);
+            //
+            treeView.SelectedNode.Expand();
+            var childNode = new TreeNode(childItem.Name) { Tag = childItem };
+            treeView.SelectedNode.Nodes.Add(childNode);
+            treeView.SelectedNode = childNode;
         }
     }
 }

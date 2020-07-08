@@ -519,13 +519,14 @@
             // 
             this.tsmiAddItem.Name = "tsmiAddItem";
             this.tsmiAddItem.Size = new System.Drawing.Size(180, 22);
-            this.tsmiAddItem.Text = "Добавить...";
+            this.tsmiAddItem.Text = "Add a child item...";
+            this.tsmiAddItem.Click += new System.EventHandler(this.tsmiAddItem_Click);
             // 
             // tsmiRenameItem
             // 
             this.tsmiRenameItem.Name = "tsmiRenameItem";
             this.tsmiRenameItem.Size = new System.Drawing.Size(180, 22);
-            this.tsmiRenameItem.Text = "Переименовать...";
+            this.tsmiRenameItem.Text = "Rename item...";
             this.tsmiRenameItem.Click += new System.EventHandler(this.tsmiRenameItem_Click);
             // 
             // toolStripMenuItem1
@@ -543,7 +544,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "BaseEditorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Конфигуратор";
+            this.Text = "Configuration Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BaseEditorForm_FormClosing);
             this.Load += new System.EventHandler(this.BaseEditorForm_Load);
             this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
