@@ -296,6 +296,7 @@ namespace BaseEditor
             tsmiRenameProp.Visible = propFound;
             tsmiDeleteProp.Visible = propFound;
             tsmiChangeValue.Visible = propFound;
+            tsmiChangeTypeOfData.Visible = propFound;
         }
 
         private void tsmiAddProp_Click(object sender, EventArgs e)
@@ -433,6 +434,52 @@ namespace BaseEditor
                 FillList(listView);
                 RestorePropSeletion(prop);
             }
+        }
+
+        /// <summary>
+        /// Заполнение меню выбора типа данных для текущего свойства
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmiSelectTypeOfData_DropDownOpening(object sender, EventArgs e)
+        {
+            tsmiChangeTypeOfData.DropDownItems.Clear();
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            if (listView.SelectedIndices.Count != 1) return;
+            var prop = (ModelProperty)listView.SelectedItems[0].Tag;
+            if (prop == null) return;
+            foreach (var pty in Helper.GetPropTypes())
+            {
+                var tsi = new ToolStripMenuItem
+                {
+                    Text = $"{pty}",
+                    Checked = prop.Type == pty.Type,
+                    Tag = pty.Type
+                };
+                tsi.Click += Tsi_Click;
+                tsmiChangeTypeOfData.DropDownItems.Add(tsi);
+            }
+        }
+
+        /// <summary>
+        /// Выбор типа данных и применение к свойству
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tsi_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            if (listView.SelectedIndices.Count != 1) return;
+            var prop = (ModelProperty)listView.SelectedItems[0].Tag;
+            if (prop == null) return;
+            var tsi = (ToolStripMenuItem)sender;
+            _undoRedoController.OnStartOperation("Change prop type");
+            prop.Type = (Type)tsi.Tag;
+            _undoRedoController.OnFinishOperation();
+            FillList(listView);
+            RestorePropSeletion(prop);
         }
     }
 }

@@ -100,6 +100,8 @@
             this.tsbDeleteProp = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiChangeValue = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiChangeTypeOfData = new System.Windows.Forms.ToolStripMenuItem();
+            this.stubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -263,23 +265,24 @@
             this.tsmiAddProp,
             this.tsmiRenameProp,
             this.tsmiDeleteProp,
-            this.tsmiChangeValue});
+            this.tsmiChangeValue,
+            this.tsmiChangeTypeOfData});
             this.listContextMenu.Name = "listContextMenu";
-            this.listContextMenu.Size = new System.Drawing.Size(181, 114);
+            this.listContextMenu.Size = new System.Drawing.Size(182, 136);
             this.listContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listContextMenu_Opening);
             // 
             // tsmiAddProp
             // 
             this.tsmiAddProp.Image = ((System.Drawing.Image)(resources.GetObject("tsmiAddProp.Image")));
             this.tsmiAddProp.Name = "tsmiAddProp";
-            this.tsmiAddProp.Size = new System.Drawing.Size(180, 22);
+            this.tsmiAddProp.Size = new System.Drawing.Size(181, 22);
             this.tsmiAddProp.Text = "Add a property...";
             this.tsmiAddProp.Click += new System.EventHandler(this.tsmiAddProp_Click);
             // 
             // tsmiRenameProp
             // 
             this.tsmiRenameProp.Name = "tsmiRenameProp";
-            this.tsmiRenameProp.Size = new System.Drawing.Size(180, 22);
+            this.tsmiRenameProp.Size = new System.Drawing.Size(174, 22);
             this.tsmiRenameProp.Text = "Rename property...";
             this.tsmiRenameProp.Click += new System.EventHandler(this.tsmiRenameProp_Click);
             // 
@@ -287,7 +290,7 @@
             // 
             this.tsmiDeleteProp.Image = ((System.Drawing.Image)(resources.GetObject("tsmiDeleteProp.Image")));
             this.tsmiDeleteProp.Name = "tsmiDeleteProp";
-            this.tsmiDeleteProp.Size = new System.Drawing.Size(180, 22);
+            this.tsmiDeleteProp.Size = new System.Drawing.Size(174, 22);
             this.tsmiDeleteProp.Text = "Delete property";
             this.tsmiDeleteProp.Click += new System.EventHandler(this.tsmiDeleteProp_Click);
             // 
@@ -732,9 +735,24 @@
             // tsmiChangeValue
             // 
             this.tsmiChangeValue.Name = "tsmiChangeValue";
-            this.tsmiChangeValue.Size = new System.Drawing.Size(180, 22);
+            this.tsmiChangeValue.Size = new System.Drawing.Size(174, 22);
             this.tsmiChangeValue.Text = "Change value...";
             this.tsmiChangeValue.Click += new System.EventHandler(this.tsmiChangeValue_Click);
+            // 
+            // tsmiSelectTypeOfData
+            // 
+            this.tsmiChangeTypeOfData.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stubToolStripMenuItem});
+            this.tsmiChangeTypeOfData.Name = "tsmiSelectTypeOfData";
+            this.tsmiChangeTypeOfData.Size = new System.Drawing.Size(181, 22);
+            this.tsmiChangeTypeOfData.Text = "Change type of data";
+            this.tsmiChangeTypeOfData.DropDownOpening += new System.EventHandler(this.tsmiSelectTypeOfData_DropDownOpening);
+            // 
+            // stubToolStripMenuItem
+            // 
+            this.stubToolStripMenuItem.Name = "stubToolStripMenuItem";
+            this.stubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stubToolStripMenuItem.Text = "(stub)";
             // 
             // BaseEditorForm
             // 
@@ -844,6 +862,8 @@
         private System.Windows.Forms.ToolStripButton tsbDeleteProp;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem tsmiChangeValue;
+        private System.Windows.Forms.ToolStripMenuItem tsmiChangeTypeOfData;
+        private System.Windows.Forms.ToolStripMenuItem stubToolStripMenuItem;
     }
 }
 
