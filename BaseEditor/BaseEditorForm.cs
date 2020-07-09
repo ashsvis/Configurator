@@ -271,7 +271,7 @@ namespace BaseEditor
                 foreach (var prop in item.Properies)
                 {
                     lvi = new ListViewItem(prop.Name) { Tag = prop };
-                    lvi.SubItems.Add($"{prop.Type}");
+                    lvi.SubItems.Add($"{prop}");
                     lvi.SubItems.Add($"{prop.Value}");
                     lv.Items.Add(lvi);
                 }
@@ -294,6 +294,7 @@ namespace BaseEditor
             var propFound = listView.SelectedIndices.Count == 1;
             tsmiRenameProp.Visible = propFound;
             tsmiDeleteProp.Visible = propFound;
+            tsmiChangeValue.Visible = propFound;
         }
 
         private void tsmiAddProp_Click(object sender, EventArgs e)
@@ -402,6 +403,30 @@ namespace BaseEditor
                     FillList(listView);
                     RestorePropSeletion(prop);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Изменить значение свойства
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsmiChangeValue_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            if (listView.SelectedIndices.Count != 1) return;
+            var prop = (ModelProperty)listView.SelectedItems[0].Tag;
+            if (prop == null) return;
+            var frm = new StringEditorForm();
+            frm.tbValue.Text = $"{prop.Value}";
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _undoRedoController.OnStartOperation("Change prop");
+                prop.Value = frm.tbValue.Text;
+                _undoRedoController.OnFinishOperation();
+                FillList(listView);
+                RestorePropSeletion(prop);
             }
         }
     }

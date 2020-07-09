@@ -11,5 +11,11 @@ namespace ModelHolder
         public object Value { get; set; }
         public int Size { get; set; }
         public int Decimal { get; set; }
+
+        public override string ToString()
+        {
+            var vals = Type.ToString().Split('.');
+            return vals[vals.Length - 1];
+        }
     }
 }
