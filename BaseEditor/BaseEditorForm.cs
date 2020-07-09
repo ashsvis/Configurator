@@ -1,6 +1,7 @@
 ﻿using ModelHolder;
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace BaseEditor
@@ -9,7 +10,7 @@ namespace BaseEditor
     {
         private UndoRedoController _undoRedoController;
         // здесь храним состояние модели
-        private ModelRoot _modelRoot = new ModelRoot();
+        private ModelRoot _modelRoot;
         private string _defaultFileName;
 
         public BaseEditorForm()
@@ -17,6 +18,8 @@ namespace BaseEditor
             InitializeComponent();
             // имя файла для сохранения состояния по умолчанию
             _defaultFileName = Path.ChangeExtension(Application.ExecutablePath, ".bin");
+            _modelRoot = new ModelRoot();
+            _modelRoot.Properies.Add(new ModelProperty() { Name = "Name", Value = "Root", Type = typeof(string) });
         }
 
         /// <summary>
@@ -91,6 +94,8 @@ namespace BaseEditor
         private void treeView_MouseDown(object sender, MouseEventArgs e)
         {
             treeView.SelectedNode = treeView.GetNodeAt(e.Location);
+            if (treeView.SelectedNode == null)
+                listView.Items.Clear();
         }
 
         /// <summary>
@@ -123,7 +128,9 @@ namespace BaseEditor
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 _undoRedoController.OnStartOperation("Rename item");
-                item.Name = frm.tbValue.Text;
+                var nameProp = item.Properies.FirstOrDefault(x => x.Name == "Name");
+                if (nameProp != null)
+                    nameProp.Value = frm.tbValue.Text;
                 _undoRedoController.OnFinishOperation();
                 treeView.SelectedNode.Text = frm.tbValue.Text;
                 FillList(listView);
@@ -142,7 +149,7 @@ namespace BaseEditor
             var item = (ModelItem)treeView.SelectedNode.Tag;
             // создадим элемент
             _undoRedoController.OnStartOperation("Add item");
-            var childItem = new ModelItem() { Name = "Child", Parent = item };
+            var childItem = new ModelItem() { Parent = item };
             item.Childs.Add(childItem);
             _undoRedoController.OnFinishOperation();
             // внесём изменения в визуальный интерфейс
@@ -227,7 +234,6 @@ namespace BaseEditor
         {
             FillList(listView);
         }
-
         
         /// <summary>
         /// Заполнение списка свойств
@@ -241,15 +247,11 @@ namespace BaseEditor
                 lv.Items.Clear();
                 if (treeView.SelectedNode == null) return;
                 var item = (ModelItem)treeView.SelectedNode.Tag;
-                var lvi = new ListViewItem("Name");
-                lvi.SubItems.Add($"{item.Name}");
-                lv.Items.Add(lvi);
-                lvi = new ListViewItem("Descriptor");
-                lvi.SubItems.Add($"{item.Descriptor}");
-                lv.Items.Add(lvi);
+                ListViewItem lvi;
                 foreach (var prop in item.Properies)
                 {
-                    lvi = new ListViewItem(prop.Name);
+                    lvi = new ListViewItem(prop.Name) { Tag = prop };
+                    lvi.SubItems.Add($"{prop.Type}");
                     lvi.SubItems.Add($"{prop.Value}");
                     lv.Items.Add(lvi);
                 }
@@ -257,6 +259,61 @@ namespace BaseEditor
             finally
             {
                 lv.EndUpdate();
+            }
+        }
+
+        private void listContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (treeView.SelectedNode == null)
+            {
+                e.Cancel = true;
+                return;
+            }
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+
+            var propFound = listView.SelectedIndices.Count == 1;
+            tsmiRenameProp.Visible = propFound;
+            tsmiDeleteProp.Visible = propFound;
+        }
+
+        private void tsmiAddProp_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            item.Properies.Add(new ModelProperty() { Name = "Prop", Type = typeof(string), Value = "Текст" });
+            FillList(listView);
+        }
+
+        private void tsmiDeleteProp_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            if (listView.SelectedIndices.Count != 1) return;
+            var prop = (ModelProperty)listView.SelectedItems[0].Tag;
+            if (prop == null) return;
+            if (MessageBox.Show(this, "Are you sure to delete this property?", "Delete property",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes) return;
+            _undoRedoController.OnStartOperation("Remove prop");
+            item.Properies.Remove(prop);
+            _undoRedoController.OnFinishOperation();
+            FillList(listView);
+        }
+
+        private void tsmiRenameProp_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            if (listView.SelectedIndices.Count != 1) return;
+            var prop = (ModelProperty)listView.SelectedItems[0].Tag;
+            if (prop == null) return;
+            var frm = new StringEditorForm();
+            frm.tbValue.Text = prop.Name;
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _undoRedoController.OnStartOperation("Rename prop");
+                prop.Name = frm.tbValue.Text;
+                _undoRedoController.OnFinishOperation();
+                FillList(listView);
             }
         }
     }

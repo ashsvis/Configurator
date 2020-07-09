@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ModelHolder
 {
@@ -10,13 +11,16 @@ namespace ModelHolder
         public List<ModelItem> Childs { get; set; } = new List<ModelItem>();
         public List<ModelProperty> Properies { get; set; } = new List<ModelProperty>();
 
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public string Name { get; set; }
-        public string Descriptor { get; set; }
-
-        public override string ToString()
+        public string Name
         {
-            return Name;
+            get
+            {
+                var nameProp = this.Properies.FirstOrDefault(x => x.Name == "Name");
+                var name = nameProp?.Value ?? this.Id;
+                return $"{name}";
+            }
         }
+
+        public Guid Id { get; set; } = Guid.NewGuid();
     }
 }

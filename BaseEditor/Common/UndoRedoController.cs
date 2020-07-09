@@ -44,7 +44,6 @@ namespace BaseEditor
             Action undo = () =>
             {
                 _root.Id = beforeOperationSnapshot.DeepClone().Id;
-                _root.Name = beforeOperationSnapshot.DeepClone().Name;
                 _root.Childs = beforeOperationSnapshot.DeepClone().Childs;
                 _root.Properies = beforeOperationSnapshot.DeepClone().Properies;
             };
@@ -52,7 +51,6 @@ namespace BaseEditor
             Action redo = () =>
             {
                 _root.Id = afterOperationSnapshot.DeepClone().Id;
-                _root.Name = afterOperationSnapshot.DeepClone().Name;
                 _root.Childs = afterOperationSnapshot.DeepClone().Childs;
                 _root.Properies = afterOperationSnapshot.DeepClone().Properies;
             };
