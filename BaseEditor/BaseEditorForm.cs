@@ -475,8 +475,19 @@ namespace BaseEditor
             var prop = (ModelProperty)listView.SelectedItems[0].Tag;
             if (prop == null) return;
             var tsi = (ToolStripMenuItem)sender;
+            var newType = (Type)tsi.Tag;
+            try
+            {
+                var value = Helper.ConvertFrom(newType, prop.Value);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Convert property type endeavor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             _undoRedoController.OnStartOperation("Change prop type");
-            prop.Type = (Type)tsi.Tag;
+            prop.Value = Helper.ConvertFrom(newType, prop.Value);
+            prop.Type = newType;
             _undoRedoController.OnFinishOperation();
             FillList(listView);
             RestorePropSeletion(prop);
