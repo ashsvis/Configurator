@@ -675,20 +675,24 @@
             // tsbMoveUp
             // 
             this.tsbMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbMoveUp.Enabled = false;
             this.tsbMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("tsbMoveUp.Image")));
             this.tsbMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbMoveUp.Name = "tsbMoveUp";
             this.tsbMoveUp.Size = new System.Drawing.Size(23, 22);
             this.tsbMoveUp.Text = "Move to up";
+            this.tsbMoveUp.Click += new System.EventHandler(this.tsbMoveUp_Click);
             // 
             // tsbMoveDown
             // 
             this.tsbMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbMoveDown.Enabled = false;
             this.tsbMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("tsbMoveDown.Image")));
             this.tsbMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbMoveDown.Name = "tsbMoveDown";
             this.tsbMoveDown.Size = new System.Drawing.Size(23, 22);
             this.tsbMoveDown.Text = "Move to down";
+            this.tsbMoveDown.Click += new System.EventHandler(this.tsbMoveDown_Click);
             // 
             // BaseEditorForm
             // 

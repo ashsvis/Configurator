@@ -223,6 +223,17 @@ namespace BaseEditor
         {
             tsbUndo.Enabled = UndoRedoManager.Instance.CanUndo;
             tsbRedo.Enabled = UndoRedoManager.Instance.CanRedo;
+            //
+            if (listView.Focused)
+            {
+                tsbMoveUp.Enabled = listView.SelectedIndices.Count == 1 && listView.SelectedItems[0].Index > 0;
+                tsbMoveDown.Enabled = listView.SelectedIndices.Count == 1 && listView.SelectedItems[0].Index < listView.Items.Count - 1;
+            }
+            else
+            {
+                tsbMoveUp.Enabled = false;
+                tsbMoveDown.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -314,6 +325,58 @@ namespace BaseEditor
                 prop.Name = frm.tbValue.Text;
                 _undoRedoController.OnFinishOperation();
                 FillList(listView);
+            }
+        }
+
+        /// <summary>
+        /// Перемещение элемента списка вверх
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbMoveUp_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            // для списка свойств
+            if (listView.Focused)
+            {
+                if (listView.SelectedIndices.Count != 1) return;
+                if (listView.SelectedItems[0].Index > 0)
+                {
+                    var index = listView.SelectedItems[0].Index;
+                    var prop = item.Properies[index];
+                    _undoRedoController.OnStartOperation("Move prop to up");
+                    item.Properies.RemoveAt(index);
+                    item.Properies.Insert(index - 1, prop);
+                    _undoRedoController.OnFinishOperation();
+                    FillList(listView);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Перемещение элемента списка вниз
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbMoveDown_Click(object sender, EventArgs e)
+        {
+            if (treeView.SelectedNode == null) return;
+            var item = (ModelItem)treeView.SelectedNode.Tag;
+            // для списка свойств
+            if (listView.Focused)
+            {
+                if (listView.SelectedIndices.Count != 1) return;
+                if (listView.SelectedItems[0].Index < listView.Items.Count - 1)
+                {
+                    var index = listView.SelectedItems[0].Index;
+                    var prop = item.Properies[index];
+                    _undoRedoController.OnStartOperation("Move prop to down");
+                    item.Properies.RemoveAt(index);
+                    item.Properies.Insert(index + 1, prop);
+                    _undoRedoController.OnFinishOperation();
+                    FillList(listView);
+                }
             }
         }
     }
