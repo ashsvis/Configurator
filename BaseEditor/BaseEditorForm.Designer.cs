@@ -93,6 +93,9 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tsbMoveUp = new System.Windows.Forms.ToolStripButton();
+            this.tsbMoveDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -105,6 +108,7 @@
             this.listContextMenu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -129,6 +133,7 @@
             // 
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
             // 
             // statusStrip1
             // 
@@ -255,27 +260,27 @@
             this.tsmiRenameProp,
             this.tsmiDeleteProp});
             this.listContextMenu.Name = "listContextMenu";
-            this.listContextMenu.Size = new System.Drawing.Size(181, 92);
+            this.listContextMenu.Size = new System.Drawing.Size(175, 70);
             this.listContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listContextMenu_Opening);
             // 
             // tsmiAddProp
             // 
             this.tsmiAddProp.Name = "tsmiAddProp";
-            this.tsmiAddProp.Size = new System.Drawing.Size(180, 22);
+            this.tsmiAddProp.Size = new System.Drawing.Size(174, 22);
             this.tsmiAddProp.Text = "Add a property...";
             this.tsmiAddProp.Click += new System.EventHandler(this.tsmiAddProp_Click);
             // 
             // tsmiRenameProp
             // 
             this.tsmiRenameProp.Name = "tsmiRenameProp";
-            this.tsmiRenameProp.Size = new System.Drawing.Size(180, 22);
+            this.tsmiRenameProp.Size = new System.Drawing.Size(174, 22);
             this.tsmiRenameProp.Text = "Rename property...";
             this.tsmiRenameProp.Click += new System.EventHandler(this.tsmiRenameProp_Click);
             // 
             // tsmiDeleteProp
             // 
             this.tsmiDeleteProp.Name = "tsmiDeleteProp";
-            this.tsmiDeleteProp.Size = new System.Drawing.Size(180, 22);
+            this.tsmiDeleteProp.Size = new System.Drawing.Size(174, 22);
             this.tsmiDeleteProp.Text = "Delete property";
             this.tsmiDeleteProp.Click += new System.EventHandler(this.tsmiDeleteProp_Click);
             // 
@@ -535,7 +540,7 @@
             this.tsbRedo,
             this.toolStripSeparator7,
             this.helpToolStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(3, 24);
+            this.toolStrip1.Location = new System.Drawing.Point(5, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(260, 25);
             this.toolStrip1.TabIndex = 1;
@@ -656,6 +661,35 @@
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbMoveUp,
+            this.tsbMoveDown});
+            this.toolStrip2.Location = new System.Drawing.Point(265, 24);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(89, 25);
+            this.toolStrip2.TabIndex = 2;
+            // 
+            // tsbMoveUp
+            // 
+            this.tsbMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("tsbMoveUp.Image")));
+            this.tsbMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbMoveUp.Name = "tsbMoveUp";
+            this.tsbMoveUp.Size = new System.Drawing.Size(23, 22);
+            this.tsbMoveUp.Text = "Move to up";
+            // 
+            // tsbMoveDown
+            // 
+            this.tsbMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("tsbMoveDown.Image")));
+            this.tsbMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbMoveDown.Name = "tsbMoveDown";
+            this.tsbMoveDown.Size = new System.Drawing.Size(23, 22);
+            this.tsbMoveDown.Text = "Move to down";
+            // 
             // BaseEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -686,6 +720,8 @@
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -755,6 +791,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAddProp;
         private System.Windows.Forms.ToolStripMenuItem tsmiDeleteProp;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton tsbMoveUp;
+        private System.Windows.Forms.ToolStripButton tsbMoveDown;
     }
 }
 
