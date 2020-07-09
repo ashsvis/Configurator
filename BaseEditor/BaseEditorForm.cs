@@ -131,6 +131,11 @@ namespace BaseEditor
                 var nameProp = item.Properies.FirstOrDefault(x => x.Name == "Name");
                 if (nameProp != null)
                     nameProp.Value = frm.tbValue.Text;
+                else
+                {
+                    var prop = new ModelProperty() { Name = "Name", Type = typeof(string), Value = frm.tbValue.Text };
+                    item.Properies.Add(prop);
+                }
                 _undoRedoController.OnFinishOperation();
                 treeView.SelectedNode.Text = frm.tbValue.Text;
                 FillList(listView);
@@ -291,8 +296,10 @@ namespace BaseEditor
         {
             if (treeView.SelectedNode == null) return;
             var item = (ModelItem)treeView.SelectedNode.Tag;
-            item.Properies.Add(new ModelProperty() { Name = "Prop", Type = typeof(string), Value = "Текст" });
+            var prop = new ModelProperty() { Name = "Prop", Type = typeof(string), Value = "Текст" };
+            item.Properies.Add(prop);
             FillList(listView);
+            RestorePropSeletion(prop);
         }
 
         private void tsmiDeleteProp_Click(object sender, EventArgs e)
@@ -325,6 +332,7 @@ namespace BaseEditor
                 prop.Name = frm.tbValue.Text;
                 _undoRedoController.OnFinishOperation();
                 FillList(listView);
+                RestorePropSeletion(prop);
             }
         }
 
@@ -350,8 +358,20 @@ namespace BaseEditor
                     item.Properies.Insert(index - 1, prop);
                     _undoRedoController.OnFinishOperation();
                     FillList(listView);
+                    RestorePropSeletion(prop);
                 }
             }
+        }
+
+        /// <summary>
+        /// восстановление выбора свойства
+        /// </summary>
+        /// <param name="prop"></param>
+        private void RestorePropSeletion(ModelProperty prop)
+        {
+            var lvi = listView.Items.Cast<ListViewItem>().FirstOrDefault(x => x.Tag == prop);
+            if (lvi != null)
+                lvi.Selected = true;
         }
 
         /// <summary>
@@ -376,6 +396,7 @@ namespace BaseEditor
                     item.Properies.Insert(index + 1, prop);
                     _undoRedoController.OnFinishOperation();
                     FillList(listView);
+                    RestorePropSeletion(prop);
                 }
             }
         }
