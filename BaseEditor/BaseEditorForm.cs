@@ -1,4 +1,5 @@
 ﻿using ModelHolder;
+using ModelHolder.Common;
 using System;
 using System.IO;
 using System.Linq;
@@ -301,10 +302,14 @@ namespace BaseEditor
         {
             if (treeView.SelectedNode == null) return;
             var item = (ModelItem)treeView.SelectedNode.Tag;
-            var prop = new ModelProperty() { Name = "Prop", Type = typeof(string), Value = "Текст" };
-            item.Properies.Add(prop);
-            FillList(listView);
-            RestorePropSeletion(prop);
+            var frm = new PropertyEditorForm();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                var prop = new ModelProperty() { Name = frm.tbName.Text, Type = ((TypeItem)frm.cbDataKind.SelectedItem).Type };
+                item.Properies.Add(prop);
+                FillList(listView);
+                RestorePropSeletion(prop);
+            }
         }
 
         private void tsmiDeleteProp_Click(object sender, EventArgs e)

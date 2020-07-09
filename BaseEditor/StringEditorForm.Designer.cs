@@ -37,6 +37,7 @@
             // 
             this.tbValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbValue.Location = new System.Drawing.Point(12, 12);
             this.tbValue.Name = "tbValue";
             this.tbValue.Size = new System.Drawing.Size(334, 23);
@@ -69,6 +70,7 @@
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(358, 84);
             this.Controls.Add(this.btnCancel);

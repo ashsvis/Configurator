@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionCommand.cs" />
+    <Compile Include="PropertyEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyEditorForm.Designer.cs">
+      <DependentUpon>PropertyEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="BaseEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,9 @@
     <Compile Include="Common\UndoableCommand.cs" />
     <Compile Include="Common\UndoRedoController.cs" />
     <Compile Include="Common\UndoRedoManager.cs" />
+    <EmbeddedResource Include="PropertyEditorForm.resx">
+      <DependentUpon>PropertyEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BaseEditorForm.resx">
       <DependentUpon>BaseEditorForm.cs</DependentUpon>
     </EmbeddedResource>
