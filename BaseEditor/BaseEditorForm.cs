@@ -233,11 +233,15 @@ namespace BaseEditor
             {
                 tsbMoveUp.Enabled = listView.SelectedIndices.Count == 1 && listView.SelectedItems[0].Index > 0;
                 tsbMoveDown.Enabled = listView.SelectedIndices.Count == 1 && listView.SelectedItems[0].Index < listView.Items.Count - 1;
+                tsbDeleteProp.Enabled = listView.SelectedIndices.Count == 1;
+                tsbAddProp.Enabled = treeView.SelectedNode != null;
             }
             else
             {
                 tsbMoveUp.Enabled = false;
                 tsbMoveDown.Enabled = false;
+                tsbDeleteProp.Enabled = false;
+                tsbAddProp.Enabled = false;
             }
         }
 

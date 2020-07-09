@@ -126,6 +126,30 @@
   <metadata name="listContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>587, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsmiAddProp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAADeSURBVDhPpZAhEsIwEEV7I7gBSCRHQOKoREYiIyvjqIxE
+        RiIjkSuRK3Gf3SSdlgIzpfyZp5L/NptqHHtmti2jwzhGrTSEnSVsT4IhrI+E1YG41PpYz+wCkLgAVvGA
+        aTNZllkd4gfB4AVpulzsJuvURJ1Z7D8I3CXiJQ+AFQZIuQORAB9Esq1Ran2cl7dLrOygaNk0IaFlYwNq
+        4bugzYJ4I0QZFZQrwStSGpIEethdUqzzWG52k0gCH/7c2ZdPm79z+bTJO4+jn6YHUym1d9GPmS3Q4phZ
+        mV3s8regpKqeZz6g1/hK96MAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="tsmiDeleteProp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAGdSURBVDhPnZEhc9wwFIT1D2JY5oOZEpsG2SxhFkuYzXLM
+        Zj0WsR6LoFnEclDwoGChYKBgWASLsn1Pti+95q6d6c58I42s3bcaiz+ln2PUu4gFZSIGZgzodIDcEiqg
+        3gRUfYiz7UPaxmgckNgDmrGA2k1MYRNV708E/NYgTaeLy2SemhgmivWJALP3ONJPIDIRCMwr4APxElHL
+        AbPtQ8ZSd5KmNzBsVqNLsFlph4FwZwN2UwBPxqiA7YDwEo4ms9n5OUAbC7MjaOU9U950KK5b4/s2YCPB
+        PNy2hs+Wb27dWj90FDBa+B/+gFtwHtZR7fHRY9OlkKe2sdzy/VsT0DcR901NASYZB2USbB42tCfs3qEb
+        NJ76B7eEvPdkXlcRbbVKb1Z6Cjg8gQIX+NuC/f5IxhroiNuiTmaW2hqUtTxLUTW+v25MMsoSqFfTWuXZ
+        HPF3cdWDscoVri5kvBSId/XnX3hKuMkjygwgE6qLNBW5UO4LheRCp0vnhCbP2BgvM3h5PDHkwtlM/LsF
+        CiHDihp8FeV8dNBbLuS8/V8J8Qt3k83pJGAmEQAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -135,7 +159,29 @@
   <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>728, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsbAddProp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADgSURBVDhPpZChDsIwEIb3RIQnIEgkj4BEkUlkJbJysopM
+        ViIrkZXIk8iTuJ+7tsvGgGSMP/lU+3/XazWOPTPbltFhHKNWGsLOErYnwRDWR8LqQFxqfaxndgFIXACr
+        eMC0mSzLrA7xg2DwgjRdLnaTdWqiziz2HwTuEvGSB8AKA6TcgUiADyLZ1ii1Ps7L2yVWdlC0bJqQ0LKx
+        AbXwXdBmQbwRoowKypXgFSkNSQI97C4p1nksN7tJJIEPf+7sy6fN37l82uSdx9FP04OplNq76MfMFmhx
+        zKzMLnb5W1BSVU9Nq6DQuNDEmAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="tsbDeleteProp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGlSURBVDhPnZGhc9swGMX1H9SwqA7sDaSmI4lZixKzDs1m
+        C0rEFlaxhlXQrEK9QMFAwUHBQsGxCY703r5PttOlTda7vbvfSSfrve/pLN5KP8WotxEDykRIpg1odEC1
+        IVRAuQ6YLEPsba/SNkbjgMQO0IwF1LajC+uYLP2RgL8apOl0cZjMUxOyY7w4EmB2Hgf6DUQmAoH5CfhA
+        PEeUlURve5Wx1J2k6Q0Mm1XrEmxW2kES7mTAtgvgyWgVsJEIz+FgMpud7wO0sTBbglbeM8VNg/F1bfzq
+        a8C6AnN3Wxs+G765RW29bCigtfA//B434Dyso9rtg8e6SSGP9dxyy5fvs4DlLOLbvKQAk4xSmQSb5Zr2
+        hN05NFLjcXXnhpCXFZkXk4h6OkpvVroL2D+BAgf424C9fyBjCTTE7VWZzCy1MSjK6iTjycyvrucmGasC
+        KEfdOs2zPuLf4qp74zRX+HxWxUuB+KV8/wuPCTcXEUUGkAnTszQVuVDunEJyodOlU8I8z9gYLzP46nBi
+        uBDOZuLjFrgSVRhRg0+i6I/2+pWLqt/+r4T4A0EczdIKzm66AAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="tsbMoveUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8

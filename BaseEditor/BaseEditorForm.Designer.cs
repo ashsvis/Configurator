@@ -96,6 +96,9 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.tsbMoveUp = new System.Windows.Forms.ToolStripButton();
             this.tsbMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.tsbAddProp = new System.Windows.Forms.ToolStripButton();
+            this.tsbDeleteProp = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -239,18 +242,18 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Свойство";
+            this.columnHeader1.Text = "Property name";
             this.columnHeader1.Width = 150;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Тип";
+            this.columnHeader2.Text = "Kind of data";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader2.Width = 100;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Значение";
+            this.columnHeader3.Text = "Value";
             this.columnHeader3.Width = 250;
             // 
             // listContextMenu
@@ -265,6 +268,7 @@
             // 
             // tsmiAddProp
             // 
+            this.tsmiAddProp.Image = ((System.Drawing.Image)(resources.GetObject("tsmiAddProp.Image")));
             this.tsmiAddProp.Name = "tsmiAddProp";
             this.tsmiAddProp.Size = new System.Drawing.Size(174, 22);
             this.tsmiAddProp.Text = "Add a property...";
@@ -279,6 +283,7 @@
             // 
             // tsmiDeleteProp
             // 
+            this.tsmiDeleteProp.Image = ((System.Drawing.Image)(resources.GetObject("tsmiDeleteProp.Image")));
             this.tsmiDeleteProp.Name = "tsmiDeleteProp";
             this.tsmiDeleteProp.Size = new System.Drawing.Size(174, 22);
             this.tsmiDeleteProp.Text = "Delete property";
@@ -665,11 +670,14 @@
             // 
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbAddProp,
+            this.tsbDeleteProp,
+            this.toolStripSeparator9,
             this.tsbMoveUp,
             this.tsbMoveDown});
             this.toolStrip2.Location = new System.Drawing.Point(265, 24);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(89, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(141, 25);
             this.toolStrip2.TabIndex = 2;
             // 
             // tsbMoveUp
@@ -693,6 +701,31 @@
             this.tsbMoveDown.Size = new System.Drawing.Size(23, 22);
             this.tsbMoveDown.Text = "Move to down";
             this.tsbMoveDown.Click += new System.EventHandler(this.tsbMoveDown_Click);
+            // 
+            // tsbAddProp
+            // 
+            this.tsbAddProp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbAddProp.Image = ((System.Drawing.Image)(resources.GetObject("tsbAddProp.Image")));
+            this.tsbAddProp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbAddProp.Name = "tsbAddProp";
+            this.tsbAddProp.Size = new System.Drawing.Size(23, 22);
+            this.tsbAddProp.Text = "Add a property...";
+            this.tsbAddProp.Click += new System.EventHandler(this.tsmiAddProp_Click);
+            // 
+            // tsbDeleteProp
+            // 
+            this.tsbDeleteProp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbDeleteProp.Image = ((System.Drawing.Image)(resources.GetObject("tsbDeleteProp.Image")));
+            this.tsbDeleteProp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDeleteProp.Name = "tsbDeleteProp";
+            this.tsbDeleteProp.Size = new System.Drawing.Size(23, 22);
+            this.tsbDeleteProp.Text = "Delete property";
+            this.tsbDeleteProp.Click += new System.EventHandler(this.tsmiDeleteProp_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
             // 
             // BaseEditorForm
             // 
@@ -798,6 +831,9 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton tsbMoveUp;
         private System.Windows.Forms.ToolStripButton tsbMoveDown;
+        private System.Windows.Forms.ToolStripButton tsbAddProp;
+        private System.Windows.Forms.ToolStripButton tsbDeleteProp;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     }
 }
 
