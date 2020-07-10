@@ -435,19 +435,18 @@ namespace BaseEditor
             if (listView.SelectedIndices.Count != 1) return;
             var prop = (ModelProperty)listView.SelectedItems[0].Tag;
             if (prop == null) return;
-            var frm = new StringEditorForm();
-            frm.tbValue.Text = $"{prop.Value}";
+            var frm = new ValueEditorForm(prop);
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 if (prop.Name == "Name")
                 {
-                    RenameItem(item, frm.tbValue.Text);
-                    treeView.SelectedNode.Text = frm.tbValue.Text;
+                    RenameItem(item, (string)frm.GetValue());
+                    treeView.SelectedNode.Text = (string)frm.GetValue();
                 }
                 else
                 {
                     _undoRedoController.OnStartOperation("Change prop");
-                    prop.Value = frm.tbValue.Text;
+                    prop.Value = frm.GetValue();
                     _undoRedoController.OnFinishOperation();
                 }
                 FillList(listView);

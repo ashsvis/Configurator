@@ -61,6 +61,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ValueEditorForm.Designer.cs">
+      <DependentUpon>ValueEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StringEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ValueEditorForm.resx">
+      <DependentUpon>ValueEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StringEditorForm.resx">
       <DependentUpon>StringEditorForm.cs</DependentUpon>
     </EmbeddedResource>
