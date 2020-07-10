@@ -45,6 +45,10 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiChangeValue = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiChangeTypeOfData = new System.Windows.Forms.ToolStripMenuItem();
+            this.stubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiAddProp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRenameProp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDeleteProp = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,16 +96,13 @@
             this.tsbRedo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.tsbMoveUp = new System.Windows.Forms.ToolStripButton();
-            this.tsbMoveDown = new System.Windows.Forms.ToolStripButton();
             this.tsbAddProp = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteProp = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiChangeValue = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiChangeTypeOfData = new System.Windows.Forms.ToolStripMenuItem();
-            this.stubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbMoveUp = new System.Windows.Forms.ToolStripButton();
+            this.tsbMoveDown = new System.Windows.Forms.ToolStripButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -251,8 +252,7 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Kind of data";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 100;
+            this.columnHeader2.Width = 80;
             // 
             // columnHeader3
             // 
@@ -262,14 +262,42 @@
             // listContextMenu
             // 
             this.listContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiChangeValue,
+            this.tsmiChangeTypeOfData,
+            this.toolStripMenuItem3,
             this.tsmiAddProp,
             this.tsmiRenameProp,
-            this.tsmiDeleteProp,
-            this.tsmiChangeValue,
-            this.tsmiChangeTypeOfData});
+            this.tsmiDeleteProp});
             this.listContextMenu.Name = "listContextMenu";
-            this.listContextMenu.Size = new System.Drawing.Size(182, 136);
+            this.listContextMenu.Size = new System.Drawing.Size(182, 120);
             this.listContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listContextMenu_Opening);
+            // 
+            // tsmiChangeValue
+            // 
+            this.tsmiChangeValue.Name = "tsmiChangeValue";
+            this.tsmiChangeValue.Size = new System.Drawing.Size(181, 22);
+            this.tsmiChangeValue.Text = "Change value...";
+            this.tsmiChangeValue.Click += new System.EventHandler(this.tsmiChangeValue_Click);
+            // 
+            // tsmiChangeTypeOfData
+            // 
+            this.tsmiChangeTypeOfData.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stubToolStripMenuItem});
+            this.tsmiChangeTypeOfData.Name = "tsmiChangeTypeOfData";
+            this.tsmiChangeTypeOfData.Size = new System.Drawing.Size(181, 22);
+            this.tsmiChangeTypeOfData.Text = "Change type of data";
+            this.tsmiChangeTypeOfData.DropDownOpening += new System.EventHandler(this.tsmiSelectTypeOfData_DropDownOpening);
+            // 
+            // stubToolStripMenuItem
+            // 
+            this.stubToolStripMenuItem.Name = "stubToolStripMenuItem";
+            this.stubToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+            this.stubToolStripMenuItem.Text = "(stub)";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(178, 6);
             // 
             // tsmiAddProp
             // 
@@ -282,7 +310,7 @@
             // tsmiRenameProp
             // 
             this.tsmiRenameProp.Name = "tsmiRenameProp";
-            this.tsmiRenameProp.Size = new System.Drawing.Size(174, 22);
+            this.tsmiRenameProp.Size = new System.Drawing.Size(181, 22);
             this.tsmiRenameProp.Text = "Rename property...";
             this.tsmiRenameProp.Click += new System.EventHandler(this.tsmiRenameProp_Click);
             // 
@@ -290,7 +318,7 @@
             // 
             this.tsmiDeleteProp.Image = ((System.Drawing.Image)(resources.GetObject("tsmiDeleteProp.Image")));
             this.tsmiDeleteProp.Name = "tsmiDeleteProp";
-            this.tsmiDeleteProp.Size = new System.Drawing.Size(174, 22);
+            this.tsmiDeleteProp.Size = new System.Drawing.Size(181, 22);
             this.tsmiDeleteProp.Text = "Delete property";
             this.tsmiDeleteProp.Click += new System.EventHandler(this.tsmiDeleteProp_Click);
             // 
@@ -550,7 +578,7 @@
             this.tsbRedo,
             this.toolStripSeparator7,
             this.helpToolStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(5, 24);
+            this.toolStrip1.Location = new System.Drawing.Point(3, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(260, 25);
             this.toolStrip1.TabIndex = 1;
@@ -666,11 +694,6 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // toolStrip2
             // 
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
@@ -680,32 +703,10 @@
             this.toolStripSeparator9,
             this.tsbMoveUp,
             this.tsbMoveDown});
-            this.toolStrip2.Location = new System.Drawing.Point(265, 24);
+            this.toolStrip2.Location = new System.Drawing.Point(263, 24);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(110, 25);
             this.toolStrip2.TabIndex = 2;
-            // 
-            // tsbMoveUp
-            // 
-            this.tsbMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbMoveUp.Enabled = false;
-            this.tsbMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("tsbMoveUp.Image")));
-            this.tsbMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbMoveUp.Name = "tsbMoveUp";
-            this.tsbMoveUp.Size = new System.Drawing.Size(23, 22);
-            this.tsbMoveUp.Text = "Move to up";
-            this.tsbMoveUp.Click += new System.EventHandler(this.tsbMoveUp_Click);
-            // 
-            // tsbMoveDown
-            // 
-            this.tsbMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbMoveDown.Enabled = false;
-            this.tsbMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("tsbMoveDown.Image")));
-            this.tsbMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbMoveDown.Name = "tsbMoveDown";
-            this.tsbMoveDown.Size = new System.Drawing.Size(23, 22);
-            this.tsbMoveDown.Text = "Move to down";
-            this.tsbMoveDown.Click += new System.EventHandler(this.tsbMoveDown_Click);
             // 
             // tsbAddProp
             // 
@@ -732,27 +733,32 @@
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             this.toolStripSeparator9.Size = new System.Drawing.Size(6, 25);
             // 
-            // tsmiChangeValue
+            // tsbMoveUp
             // 
-            this.tsmiChangeValue.Name = "tsmiChangeValue";
-            this.tsmiChangeValue.Size = new System.Drawing.Size(174, 22);
-            this.tsmiChangeValue.Text = "Change value...";
-            this.tsmiChangeValue.Click += new System.EventHandler(this.tsmiChangeValue_Click);
+            this.tsbMoveUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbMoveUp.Enabled = false;
+            this.tsbMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("tsbMoveUp.Image")));
+            this.tsbMoveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbMoveUp.Name = "tsbMoveUp";
+            this.tsbMoveUp.Size = new System.Drawing.Size(23, 22);
+            this.tsbMoveUp.Text = "Move to up";
+            this.tsbMoveUp.Click += new System.EventHandler(this.tsbMoveUp_Click);
             // 
-            // tsmiSelectTypeOfData
+            // tsbMoveDown
             // 
-            this.tsmiChangeTypeOfData.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stubToolStripMenuItem});
-            this.tsmiChangeTypeOfData.Name = "tsmiSelectTypeOfData";
-            this.tsmiChangeTypeOfData.Size = new System.Drawing.Size(181, 22);
-            this.tsmiChangeTypeOfData.Text = "Change type of data";
-            this.tsmiChangeTypeOfData.DropDownOpening += new System.EventHandler(this.tsmiSelectTypeOfData_DropDownOpening);
+            this.tsbMoveDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbMoveDown.Enabled = false;
+            this.tsbMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("tsbMoveDown.Image")));
+            this.tsbMoveDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbMoveDown.Name = "tsbMoveDown";
+            this.tsbMoveDown.Size = new System.Drawing.Size(23, 22);
+            this.tsbMoveDown.Text = "Move to down";
+            this.tsbMoveDown.Click += new System.EventHandler(this.tsbMoveDown_Click);
             // 
-            // stubToolStripMenuItem
+            // timer1
             // 
-            this.stubToolStripMenuItem.Name = "stubToolStripMenuItem";
-            this.stubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.stubToolStripMenuItem.Text = "(stub)";
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // BaseEditorForm
             // 
@@ -864,6 +870,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiChangeValue;
         private System.Windows.Forms.ToolStripMenuItem tsmiChangeTypeOfData;
         private System.Windows.Forms.ToolStripMenuItem stubToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
     }
 }
 

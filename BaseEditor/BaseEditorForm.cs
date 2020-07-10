@@ -128,19 +128,29 @@ namespace BaseEditor
             frm.tbValue.Text = item.Name;
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                _undoRedoController.OnStartOperation("Rename item");
-                var nameProp = item.Properies.FirstOrDefault(x => x.Name == "Name");
-                if (nameProp != null)
-                    nameProp.Value = frm.tbValue.Text;
-                else
-                {
-                    var prop = new ModelProperty() { Name = "Name", Type = typeof(string), Value = frm.tbValue.Text };
-                    item.Properies.Add(prop);
-                }
-                _undoRedoController.OnFinishOperation();
+                RenameItem(item, frm.tbValue.Text);
                 treeView.SelectedNode.Text = frm.tbValue.Text;
                 FillList(listView);
             }
+        }
+
+        /// <summary>
+        /// Переименование элемента
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="name"></param>
+        private void RenameItem(ModelItem item, string name)
+        {
+            _undoRedoController.OnStartOperation("Rename item");
+            var nameProp = item.Properies.FirstOrDefault(x => x.Name == "Name");
+            if (nameProp != null)
+                nameProp.Value = name;
+            else
+            {
+                var prop = new ModelProperty() { Name = "Name", Type = typeof(string), Value = name };
+                item.Properies.Add(prop);
+            }
+            _undoRedoController.OnFinishOperation();
         }
 
 
@@ -297,6 +307,7 @@ namespace BaseEditor
             tsmiDeleteProp.Visible = propFound;
             tsmiChangeValue.Visible = propFound;
             tsmiChangeTypeOfData.Visible = propFound;
+            toolStripMenuItem3.Visible = propFound;
         }
 
         private void tsmiAddProp_Click(object sender, EventArgs e)
@@ -428,9 +439,17 @@ namespace BaseEditor
             frm.tbValue.Text = $"{prop.Value}";
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                _undoRedoController.OnStartOperation("Change prop");
-                prop.Value = frm.tbValue.Text;
-                _undoRedoController.OnFinishOperation();
+                if (prop.Name == "Name")
+                {
+                    RenameItem(item, frm.tbValue.Text);
+                    treeView.SelectedNode.Text = frm.tbValue.Text;
+                }
+                else
+                {
+                    _undoRedoController.OnStartOperation("Change prop");
+                    prop.Value = frm.tbValue.Text;
+                    _undoRedoController.OnFinishOperation();
+                }
                 FillList(listView);
                 RestorePropSeletion(prop);
             }
