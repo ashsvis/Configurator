@@ -24,32 +24,46 @@ namespace BaseEditor
             switch (n)
             {
                 //case 1: return Convert.ToBoolean(value);
+                //    Text = "Enter a bool value here";
+                //    break;
                 case 2:
+                    Text = "Enter a byte value here";
                     _control = GetNumericUpDown(0, byte.MinValue, byte.MaxValue);
                     break;
                 case 3:
+                    Text = "Enter a integer value here";
                     _control = GetNumericUpDown(0, int.MinValue, int.MaxValue);
                     break;
                 case 4:
+                    Text = "Enter a long value here";
                     _control = GetNumericUpDown(0, long.MinValue, long.MaxValue);
                     break;
                 case 5:
+                    Text = "Enter a float value here";
                     _control = GetNumericUpDown(6, long.MinValue, long.MaxValue);
                     break;
                 case 6:
+                    Text = "Enter a double value here";
                     _control = GetNumericUpDown(6, long.MinValue, long.MaxValue);
                     break;
                 case 7:
+                    Text = "Enter a decimal value here";
                     _control = GetNumericUpDown(6, long.MinValue, long.MaxValue);
                     break;
-                //case 8: return Convert.ToDateTime(value);
+                case 8:
+                    Text = "Enter a date and time value here";
+                    _control = new DateTimePicker() { Value = Convert.ToDateTime(prop.Value) };
+                    break;
                 default:
+                    Text = "Enter a text value here";
                     _control = new TextBox() { Text = $"{prop.Value}" };
                     break;
             }
-            if (n >= 3 && n <= 7)
+            if (n >= 2 && n <= 7)
+            {
                 ((NumericUpDown)_control).Value = Convert.ToDecimal(prop.Value);
-
+                ((NumericUpDown)_control).Select(0, 10);
+            }
             _control.Location = new Point(12, 12);
             _control.Size = new Size(214, 23);
             _control.TabIndex = 0;
