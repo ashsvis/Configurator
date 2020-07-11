@@ -85,6 +85,8 @@ namespace BaseEditor
         {
             if (_control is NumericUpDown)
                 return ((NumericUpDown)_control).Value;
+            if (_control is DateTimePicker)
+                return ((DateTimePicker)_control).Value;
             return ((TextBox)_control).Text;
         }
     }
