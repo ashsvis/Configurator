@@ -292,6 +292,11 @@ namespace BaseEditor
             }
         }
 
+        /// <summary>
+        /// Открытие контекстного меню списка свойств
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (treeView.SelectedNode == null)
@@ -307,6 +312,11 @@ namespace BaseEditor
             toolStripMenuItem3.Visible = propFound;
         }
 
+        /// <summary>
+        /// Добавление свойства
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsmiAddProp_Click(object sender, EventArgs e)
         {
             if (treeView.SelectedNode == null) return;
@@ -321,6 +331,11 @@ namespace BaseEditor
             }
         }
 
+        /// <summary>
+        /// Удаление свойства
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsmiDeleteProp_Click(object sender, EventArgs e)
         {
             if (treeView.SelectedNode == null) return;
@@ -336,6 +351,11 @@ namespace BaseEditor
             FillList(listView);
         }
 
+        /// <summary>
+        /// Переименование свойства
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsmiRenameProp_Click(object sender, EventArgs e)
         {
             if (treeView.SelectedNode == null) return;
