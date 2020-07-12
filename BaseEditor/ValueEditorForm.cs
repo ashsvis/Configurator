@@ -23,9 +23,12 @@ namespace BaseEditor
             }
             switch (n)
             {
-                //case 1: return Convert.ToBoolean(value);
-                //    Text = "Enter a bool value here";
-                //    break;
+                case 1:
+                    Text = "Enter a bool value here";
+                    _control = new CheckBox() { Checked = Convert.ToBoolean(prop.Value) };
+                    _control.Text = $"{((CheckBox)_control).Checked}";
+                    _control.Click += (o, e) => { ((CheckBox)o).Text = $"{((CheckBox)o).Checked}"; };
+                    break;
                 case 2:
                     Text = "Enter a byte value here";
                     _control = GetNumericUpDown(0, byte.MinValue, byte.MaxValue);
@@ -87,6 +90,8 @@ namespace BaseEditor
                 return ((NumericUpDown)_control).Value;
             if (_control is DateTimePicker)
                 return ((DateTimePicker)_control).Value;
+            if (_control is CheckBox)
+                return ((CheckBox)_control).Checked;
             return ((TextBox)_control).Text;
         }
     }

@@ -153,7 +153,6 @@ namespace BaseEditor
             _undoRedoController.OnFinishOperation();
         }
 
-
         /// <summary>
         /// Добавим вложенный элемент
         /// </summary>
@@ -300,8 +299,6 @@ namespace BaseEditor
                 e.Cancel = true;
                 return;
             }
-            var item = (ModelItem)treeView.SelectedNode.Tag;
-
             var propFound = listView.SelectedIndices.Count == 1;
             tsmiRenameProp.Visible = propFound;
             tsmiDeleteProp.Visible = propFound;
@@ -342,7 +339,6 @@ namespace BaseEditor
         private void tsmiRenameProp_Click(object sender, EventArgs e)
         {
             if (treeView.SelectedNode == null) return;
-            var item = (ModelItem)treeView.SelectedNode.Tag;
             if (listView.SelectedIndices.Count != 1) return;
             var prop = (ModelProperty)listView.SelectedItems[0].Tag;
             if (prop == null) return;
@@ -463,7 +459,6 @@ namespace BaseEditor
         {
             tsmiChangeTypeOfData.DropDownItems.Clear();
             if (treeView.SelectedNode == null) return;
-            var item = (ModelItem)treeView.SelectedNode.Tag;
             if (listView.SelectedIndices.Count != 1) return;
             var prop = (ModelProperty)listView.SelectedItems[0].Tag;
             if (prop == null) return;
@@ -488,7 +483,6 @@ namespace BaseEditor
         private void Tsi_Click(object sender, EventArgs e)
         {
             if (treeView.SelectedNode == null) return;
-            var item = (ModelItem)treeView.SelectedNode.Tag;
             if (listView.SelectedIndices.Count != 1) return;
             var prop = (ModelProperty)listView.SelectedItems[0].Tag;
             if (prop == null) return;
